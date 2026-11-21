@@ -13,9 +13,11 @@ export const vehicleLabels = {
   fuel: "加油车",
   baggage: "行李车",
   clean: "清洁车",
+  cargo: "装载车",
 };
 export const vehicleColors = {
   fuel: "#e5a84e",
   baggage: "#529e9b",
   clean: "#7e8eb1",
+  cargo: "#9778b0",
 };

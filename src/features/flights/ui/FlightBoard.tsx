@@ -23,7 +23,12 @@ export function FlightBoard({ state, onSelect }: Props) {
         <b>06</b>
       </div>
       <div className="flight-list">
-        {state.flights.map((f) => (
+        {state.flights.map((f) => {
+          const outbound = state.cargo.filter(
+              (b) => b.flightId === f.id && !b.inbound,
+            ),
+            planned = outbound.filter((b) => b.plan).length;
+          return (
           <button
             key={f.id}
             className={`flight-card ${f.id === state.selectedFlightId ? "selected" : ""} ${f.status === "departed" ? "completed" : ""}`}
@@ -47,6 +52,7 @@ export function FlightBoard({ state, onSelect }: Props) {
             <div className="flight-meta">
               <span>
                 {f.aircraft} · {f.passengers} PAX
+                {outbound.length > 0 && ` · 货 ${planned}/${outbound.length}`}
               </span>
               <span>
                 {f.standId ?? "—"} <i /> {clockLabel(f.deadline)}
@@ -58,7 +64,8 @@ export function FlightBoard({ state, onSelect }: Props) {
               </div>
             )}
           </button>
-        ))}
+          );
+        })}
       </div>
       <div className="shift-note">
         <span>☀</span>

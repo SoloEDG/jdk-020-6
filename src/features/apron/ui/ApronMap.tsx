@@ -1,5 +1,6 @@
 import type { Shift } from "../../../shared/types";
 import { occupiedFlight, compatibleStand } from "../lib/geometry";
+import { cargoClasses, stagingSlots } from "../../cargo";
 import { Aircraft } from "./Aircraft";
 interface Props {
   state: Shift;
@@ -199,6 +200,29 @@ export function ApronMap({ state, onStand, onFlight }: Props) {
                   {f.id}
                 </text>
               )}
+              {f &&
+                Array.from({ length: stagingSlots }, (_, i) => {
+                  const b = state.cargo.find(
+                    (x) =>
+                      x.flightId === f.id &&
+                      x.location.kind === "staging" &&
+                      x.location.slot === i,
+                  );
+                  return (
+                    <rect
+                      key={i}
+                      x={stand.x - 78 + i * 19}
+                      y={stand.y + 54}
+                      width="15"
+                      height="11"
+                      rx="2"
+                      fill={b ? cargoClasses[b.cargoClass].color : "#eef0e4"}
+                      fillOpacity={b ? 0.95 : 0.55}
+                      stroke="#9aa48f"
+                      strokeWidth="0.7"
+                    />
+                  );
+                })}
               {!f && selected?.status === "incoming" && compatible && (
                 <circle
                   cx={stand.x + 67}
@@ -247,7 +271,9 @@ export function ApronMap({ state, onStand, onFlight }: Props) {
                   ? "#dda24d"
                   : v.kind === "baggage"
                     ? "#4b9392"
-                    : "#798cab"
+                    : v.kind === "clean"
+                      ? "#798cab"
+                      : "#9778b0"
               }
               stroke="#f3f0df"
               strokeWidth="1.5"
@@ -294,6 +320,10 @@ export function ApronMap({ state, onStand, onFlight }: Props) {
         <span>
           <i className="legend-selected" />
           当前选择
+        </span>
+        <span>
+          <i className="legend-staging" />
+          临时区货位
         </span>
         <span className="map-scale">0 ━━━━━ 100 m</span>
       </div>

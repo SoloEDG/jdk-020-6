@@ -3,6 +3,7 @@ import { clockLabel } from "../shared/document";
 import { flightReady, departFlight, statusLabels } from "../features/flights";
 import { StandPicker } from "../features/apron";
 import { ServicePanel } from "../features/services";
+import { CargoPanel } from "../features/cargo";
 import { EventLog } from "../features/session";
 export function Inspector({
   state,
@@ -10,12 +11,16 @@ export function Inspector({
   onStand,
   onAssign,
   onDispatch,
+  onPlan,
+  onLoader,
 }: {
   state: Shift;
   onChange: (s: Shift) => void;
   onStand: (id: string) => void;
   onAssign: (id: string) => void;
   onDispatch: (k: ServiceKind, v: string) => void;
+  onPlan: (batchId: string, compartment: string | null) => void;
+  onLoader: (vehicleId: string) => void;
 }) {
   const f = state.flights.find((x) => x.id === state.selectedFlightId)!;
   return (
@@ -54,18 +59,22 @@ export function Inspector({
         <div className="stand-occupancy">
           <span>机位 {f.standId} · 服务位</span>
           <b>
-            {
-              state.services.filter(
-                (t) =>
-                  t.flightId === f.id &&
-                  (t.status === "travel" || t.status === "working"),
-              ).length
-            }{" "}
+            {state.services.filter(
+              (t) =>
+                t.flightId === f.id &&
+                (t.status === "travel" || t.status === "working"),
+            ).length +
+              state.vehicles.filter(
+                (v) =>
+                  v.cargoFlightId === f.id &&
+                  (v.status === "travel" || v.status === "working"),
+              ).length}{" "}
             / 2 占用
           </b>
         </div>
       )}
       <ServicePanel state={state} onDispatch={onDispatch} />
+      <CargoPanel state={state} onPlan={onPlan} onLoader={onLoader} />
       <button
         className="primary depart-button"
         data-testid="depart"

@@ -20,6 +20,23 @@ export function initialVehicles(): Vehicle[] {
         tripDuration: 10,
       });
     }
+  for (const [id, liftCapacity] of [
+    ["LD-01", 1800],
+    ["LD-02", 3200],
+  ] as [string, number][]) {
+    const p = { x: 810 + (result.length % 2) * 36, y: 430 + result.length * 15 };
+    result.push({
+      id,
+      kind: "cargo",
+      status: "idle",
+      position: p,
+      origin: p,
+      target: p,
+      progress: 0,
+      tripDuration: 10,
+      liftCapacity,
+    });
+  }
   return result;
 }
 export function selectVehicle(

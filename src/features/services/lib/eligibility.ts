@@ -18,11 +18,17 @@ export function serviceBlockReason(
     )
   )
     return "等待行李装卸完成";
-  const active = s.services.filter(
-    (t) =>
-      t.flightId === flightId &&
-      (t.status === "travel" || t.status === "working"),
-  ).length;
+  const active =
+    s.services.filter(
+      (t) =>
+        t.flightId === flightId &&
+        (t.status === "travel" || t.status === "working"),
+    ).length +
+    s.vehicles.filter(
+      (v) =>
+        v.cargoFlightId === flightId &&
+        (v.status === "travel" || v.status === "working"),
+    ).length;
   if (active >= 2) return "机位的两个服务位均已占用";
   return undefined;
 }

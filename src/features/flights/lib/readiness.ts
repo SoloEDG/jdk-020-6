@@ -1,7 +1,12 @@
 import type { Flight, Shift } from "../../../shared/types";
+import { cargoDepartBlockers } from "../../cargo";
 export function flightReady(state: Shift, id: string): boolean {
   const tasks = state.services.filter((t) => t.flightId === id);
-  return tasks.length === 3 && tasks.every((t) => t.status === "done");
+  return (
+    tasks.length === 3 &&
+    tasks.every((t) => t.status === "done") &&
+    cargoDepartBlockers(state, id).length === 0
+  );
 }
 export function turnaroundProgress(state: Shift, id: string): number {
   const tasks = state.services.filter((t) => t.flightId === id);

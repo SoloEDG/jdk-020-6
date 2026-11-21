@@ -1,4 +1,5 @@
 export type ServiceKind = "baggage" | "fuel" | "clean";
+export type VehicleKind = ServiceKind | "cargo";
 export type FlightStatus =
   "scheduled" | "incoming" | "parked" | "departing" | "departed";
 export interface Point {
@@ -36,7 +37,7 @@ export interface Service {
 }
 export interface Vehicle {
   id: string;
-  kind: ServiceKind;
+  kind: VehicleKind;
   status: "idle" | "travel" | "working" | "returning";
   position: Point;
   origin: Point;
@@ -44,6 +45,43 @@ export interface Vehicle {
   progress: number;
   tripDuration: number;
   serviceId?: string;
+  cargoFlightId?: string;
+  liftCapacity?: number;
+}
+export type CargoClass = "GEN" | "PER" | "AVI" | "RFL" | "ROX";
+export type CargoLocation =
+  | { kind: "warehouse" }
+  | { kind: "staging"; slot: number }
+  | { kind: "loader"; vehicleId: string }
+  | { kind: "hold"; compartment: string }
+  | { kind: "done" };
+export interface CargoBatch {
+  id: string;
+  flightId: string;
+  inbound: boolean;
+  destination: string;
+  weight: number;
+  cargoClass: CargoClass;
+  revenue: number;
+  plan: string | null;
+  location: CargoLocation;
+}
+export type CargoMoveKind =
+  | "unload"
+  | "deliver"
+  | "fetch"
+  | "load"
+  | "offload"
+  | "return";
+export interface CargoMove {
+  id: string;
+  flightId: string;
+  batchId: string;
+  kind: CargoMoveKind;
+  to: CargoLocation;
+  vehicleId: string;
+  progress: number;
+  duration: number;
 }
 export interface Event {
   id: number;
@@ -52,16 +90,19 @@ export interface Event {
   tone: "info" | "success" | "warning";
 }
 export interface Shift {
-  version: 1;
+  version: 2;
   time: number;
   paused: boolean;
   speed: 1 | 2 | 4;
   score: number;
   conflicts: number;
+  cargoRevenue: number;
   flights: Flight[];
   stands: Stand[];
   services: Service[];
   vehicles: Vehicle[];
+  cargo: CargoBatch[];
+  cargoMoves: CargoMove[];
   events: Event[];
   selectedFlightId: string;
   selectedStandId?: string;

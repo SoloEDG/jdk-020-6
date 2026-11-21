@@ -3,6 +3,7 @@ import type { Shift } from "../shared/types";
 import { advanceClock, createShift } from "../features/session";
 import { advanceFleet } from "../features/fleet";
 import { advanceServices } from "../features/services";
+import { advanceCargo } from "../features/cargo";
 export function useSimulation() {
   const [state, setState] = useState<Shift>(createShift);
   useEffect(() => {
@@ -14,7 +15,10 @@ export function useSimulation() {
       setState((s) => {
         if (s.paused) return s;
         const dt = elapsed * s.speed;
-        return advanceServices(advanceFleet(advanceClock(s, dt), dt), dt);
+        return advanceCargo(
+          advanceServices(advanceFleet(advanceClock(s, dt), dt), dt),
+          dt,
+        );
       });
     }, 100);
     return () => clearInterval(id);

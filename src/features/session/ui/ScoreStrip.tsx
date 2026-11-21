@@ -38,6 +38,16 @@ export function ScoreStrip({ state }: { state: Shift }) {
         </p>
       </div>
       <div>
+        <span className="stat-icon">▦</span>
+        <p>
+          货运收益
+          <strong>
+            {state.cargoRevenue}
+            <small>PTS</small>
+          </strong>
+        </p>
+      </div>
+      <div>
         <span className="stat-icon">◇</span>
         <p>
           指令冲突

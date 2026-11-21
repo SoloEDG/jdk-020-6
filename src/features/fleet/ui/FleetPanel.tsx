@@ -21,8 +21,8 @@ export function FleetPanel({
           <h2>
             地勤车队{" "}
             <small>
-              {state.vehicles.filter((v) => v.status === "idle").length} / 6
-              待命
+              {state.vehicles.filter((v) => v.status === "idle").length} /{" "}
+              {state.vehicles.length} 待命
             </small>
           </h2>
         </div>
@@ -44,7 +44,10 @@ export function FleetPanel({
             </span>
             <div>
               <strong>{v.id}</strong>
-              <span>{vehicleLabels[v.kind]}</span>
+              <span>
+                {vehicleLabels[v.kind]}
+                {v.kind === "cargo" ? ` ≤${v.liftCapacity}kg` : ""}
+              </span>
             </div>
             <em className={v.status === "idle" ? "idle" : ""}>
               <i />

@@ -939,6 +939,266 @@ h1 > span {
   width: 100%;
   margin: 19px 0 22px;
 }
+.cargo-panel {
+  margin-top: 22px;
+  border-top: 1px solid #e0e4d6;
+  padding-top: 16px;
+}
+.cargo-panel .subheading {
+  margin-bottom: 4px;
+}
+.cargo-revenue {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0 12px;
+}
+.cargo-revenue > div {
+  flex: 1;
+  background: #f2f4ea;
+  border: 1px solid #e0e3d3;
+  border-radius: 5px;
+  padding: 8px 10px;
+}
+.cargo-revenue span {
+  font-size: 8px;
+  color: #93a08c;
+  display: block;
+}
+.cargo-revenue b {
+  font:
+    600 16px "Barlow Condensed",
+    sans-serif;
+  color: #4c7a5f;
+  letter-spacing: 0.5px;
+}
+.cargo-revenue b.lost {
+  color: #b08a56;
+}
+.cg-track {
+  position: relative;
+  height: 8px;
+  background: #e7e9dc;
+  border-radius: 4px;
+  margin: 10px 0 4px;
+}
+.cg-envelope {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: #a8c8a0;
+  opacity: 0.75;
+  border-radius: 4px;
+}
+.cg-marker {
+  position: absolute;
+  top: -3px;
+  width: 3px;
+  height: 14px;
+  background: #334d50;
+  border-radius: 2px;
+  transform: translateX(-50%);
+}
+.cg-marker.out {
+  background: #c75448;
+}
+.cg-scale {
+  display: flex;
+  justify-content: space-between;
+  font-size: 8px;
+  color: #9aa48f;
+}
+.comp-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 7px;
+  font-size: 9px;
+  color: #7c8a7a;
+}
+.comp-row > span:first-child {
+  width: 28px;
+  flex-shrink: 0;
+}
+.comp-row > span:last-child {
+  font-family: monospace;
+  font-size: 8px;
+  min-width: 58px;
+  text-align: right;
+}
+.comp-track {
+  flex: 1;
+  height: 5px;
+  background: #e7e9dc;
+  border-radius: 3px;
+  position: relative;
+}
+.comp-track i {
+  position: absolute;
+  height: 100%;
+  background: #8fb49a;
+  border-radius: 3px;
+}
+.comp-track i.over {
+  background: #c75448;
+}
+.comp-track b {
+  position: absolute;
+  height: 100%;
+  background: #3f6b52;
+  opacity: 0.5;
+  border-radius: 3px;
+}
+.cargo-violations {
+  margin-top: 10px;
+}
+.cargo-violations p {
+  font-size: 8px;
+  color: #b56b4d;
+  line-height: 1.8;
+}
+.cargo-list {
+  margin-top: 12px;
+  border-top: 1px solid #eceee0;
+}
+.cargo-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid #eceee0;
+}
+.cls-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.cargo-main {
+  flex: 1;
+  min-width: 0;
+}
+.cargo-main strong {
+  font-size: 9px;
+  font-weight: 500;
+  display: block;
+}
+.cargo-main span {
+  font-size: 8px;
+  color: #97a28d;
+  display: block;
+  margin-top: 2px;
+}
+.cargo-row select {
+  font: inherit;
+  font-size: 9px;
+  border: 1px solid #d5dac8;
+  border-radius: 4px;
+  background: #f4f5ea;
+  padding: 4px 2px;
+  color: #5c6b60;
+}
+.cargo-row.inbound .cargo-main strong {
+  color: #7c8a96;
+}
+.inbound-tag {
+  font-style: normal;
+  font-size: 8px;
+  color: #8a9aa8;
+  border: 1px solid #d8dee2;
+  border-radius: 3px;
+  padding: 3px 5px;
+}
+.staging {
+  margin-top: 14px;
+}
+.staging-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  color: #7c8a7a;
+  margin-bottom: 7px;
+}
+.staging-slots {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+.slot {
+  border: 1.5px dashed #c9cfba;
+  border-radius: 4px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  font-size: 8px;
+  color: #a8b098;
+}
+.slot.occupied {
+  border-style: solid;
+  color: #fff;
+  font-weight: 600;
+}
+.staging-note,
+.pending-note {
+  font-size: 8px;
+  color: #9ba48f;
+  margin-top: 7px;
+  line-height: 1.7;
+}
+.cargo-ops {
+  margin-top: 14px;
+}
+.move-row {
+  font-size: 9px;
+  color: #6c7b6a;
+  margin-top: 7px;
+}
+.move-row .task-track {
+  margin-top: 4px;
+}
+.loader-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 10px;
+}
+.loader-buttons button {
+  border: 1px solid #d5dac8;
+  background: #f2f3e9;
+  border-radius: 4px;
+  font-size: 9px;
+  padding: 8px 4px;
+  color: #5c7060;
+}
+.loader-buttons button small {
+  display: block;
+  font-size: 8px;
+  color: #97a28d;
+  margin-top: 2px;
+}
+.depart-check {
+  margin-top: 14px;
+  border-radius: 5px;
+  padding: 10px 12px;
+  font-size: 9px;
+}
+.depart-check.ok {
+  background: #eef3e8;
+  color: #5d8a6a;
+  border: 1px solid #d5e0cc;
+}
+.depart-check.blocked {
+  background: #f8efe4;
+  color: #a8763e;
+  border: 1px solid #ecd9bd;
+}
+.depart-check p {
+  line-height: 1.7;
+  margin-top: 3px;
+}
+.map-legend .legend-staging {
+  background: #9778b0;
+  border-color: #9778b0;
+}
 .event-log {
   border-top: 1px solid #e0e4d6;
   padding-top: 16px;
